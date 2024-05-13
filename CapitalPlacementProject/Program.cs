@@ -3,6 +3,7 @@ using CapitalPlacementProject.Repository.Interfaces;
 using CapitalPlacementProject.Services;
 using CapitalPlacementProject.Services.Interfaces;
 using Microsoft.Azure.Cosmos;
+using System.Text.Json.Serialization;
 namespace CapitalPlacementProject
 {
     public class Program
@@ -23,11 +24,12 @@ namespace CapitalPlacementProject
             });
             builder.Services.AddTransient<IQuestionsService, QuestionsService>();
             builder.Services.AddSingleton<IQuestionsRepository,QuestionsRepository>();
-            builder.Services.AddControllers();
+            builder.Services.AddControllers().AddJsonOptions(options=>
+                                           options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()));
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
-
+                    
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.

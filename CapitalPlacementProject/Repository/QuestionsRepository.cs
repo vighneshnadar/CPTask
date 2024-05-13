@@ -1,6 +1,7 @@
 ﻿using CapitalPlacementProject.Models;
 using CapitalPlacementProject.Repository.Interfaces;
 using Microsoft.Azure.Cosmos;
+using Microsoft.Azure.Cosmos.Linq;
 
 namespace CapitalPlacementProject.Repository
 {
@@ -22,5 +23,22 @@ namespace CapitalPlacementProject.Repository
             //questions.id = Guid.NewGuid().ToString();
             await _container.CreateItemAsync(questions,new PartitionKey(questions.Type));
         }
-    }
+        public async Task<Questions> UpdateQuestions(string id,Questions questions)
+        {
+            var response  = await _container.ReplaceItemAsync<Questions>(questions,id,new PartitionKey(questions.Type));
+            return response.Resource;
+        }
+        public async Task<List<Questions>> GetQuestionsByType(string type)
+        {
+            var response = _container.GetItemLinqQueryable<Questions>()
+                                     .Where(c=>c.Type==type).ToFeedIterator();
+            var questions = new List<Questions>();
+            while (response.HasMoreResults)
+            {
+                var singlequestion = await response.ReadNextAsync();
+                questions.AddRange(singlequestion);
+            }
+            return questions;
+        }
+    } 
 }

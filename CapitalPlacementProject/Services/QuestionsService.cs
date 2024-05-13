@@ -15,5 +15,17 @@ namespace CapitalPlacementProject.Services
         {
             await _questionsRepository.AddQuestions(question);
         }
+        public async Task<Questions> UpdateQuestion(string id,Questions question)
+        {
+            var response = await _questionsRepository.UpdateQuestions(id,question);
+            return response;
+        }
+
+        public async Task<List<Questions>> GetQuestionsByType(string type)
+        {
+            var response = await _questionsRepository.GetQuestionsByType(type);
+            return response;
+        }
+   
     }
 }

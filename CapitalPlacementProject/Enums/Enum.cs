@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using System.ComponentModel.DataAnnotations;
 
 namespace CapitalPlacementProject.Enums
 {
@@ -6,11 +7,16 @@ namespace CapitalPlacementProject.Enums
     {
         public enum QuestionType
         {
-            Date,
-            MCQ,
-            YesNo,
-            Paragraph,
-            NumbeR
+            [Display(Name = "Date")]
+            Date = 1,
+            [Display(Name = "Multiple Choice")]
+            MultipleChoice = 2,
+            [Display(Name = "Yes/No")]
+            YesNo = 3,
+            [Display(Name = "Paragraph")]
+            Paragraph = 4,
+            [Display(Name = "Number")]
+            Number = 5
         }
     }
 }
