@@ -24,6 +24,10 @@ namespace CapitalPlacementProject
             });
             builder.Services.AddTransient<IQuestionsService, QuestionsService>();
             builder.Services.AddSingleton<IQuestionsRepository,QuestionsRepository>();
+
+            builder.Services.AddTransient<ICandidateSubmissionsService, CandidateSubmissionsService>();
+            builder.Services.AddSingleton<ICandidateSubmissionRepository, CandidatesSubmissionRepository>();
+
             builder.Services.AddControllers().AddJsonOptions(options=>
                                            options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()));
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
