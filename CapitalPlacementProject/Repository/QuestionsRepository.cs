@@ -40,5 +40,18 @@ namespace CapitalPlacementProject.Repository
             }
             return questions;
         }
+        public async Task<Questions> GetQuestionsById(string id)
+        {
+            var query = new QueryDefinition("SELECT * FROM c WHERE c.id = @id")
+                        .WithParameter("@id", id);
+
+            var iterator = _container.GetItemQueryIterator<Questions>(query);
+            var response = await iterator.ReadNextAsync();
+            if (!response.Any())
+            {
+                return null;
+            }         
+           return response.FirstOrDefault();
+        }
     } 
 }

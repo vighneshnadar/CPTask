@@ -7,5 +7,6 @@ namespace CapitalPlacementProject.Repository.Interfaces
         Task AddQuestions(Questions questions);
         Task<Questions> UpdateQuestions(string id, Questions questions);
         Task<List<Questions>> GetQuestionsByType(string type);
+        Task<Questions> GetQuestionsById(string id);
     }
 }

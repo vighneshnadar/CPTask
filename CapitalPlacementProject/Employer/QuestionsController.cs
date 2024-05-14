@@ -38,6 +38,13 @@ namespace CapitalPlacementProject.Employer
             var res = await _questionsService.GetQuestionsByType(typeString);
             return Ok(res);
         }
+        [HttpGet]
+        [Route("/GetQuestionsById/{id}")]
+        public async Task<IActionResult> GetQuestionsById(string id)
+        {
+            var res = await _questionsService.GetQuestionsById(id);
+            return Ok(res);
+        }
 
     }
 }

@@ -7,5 +7,6 @@ namespace CapitalPlacementProject.Services.Interfaces
         Task CreateQuestion(Questions question);
         Task<Questions> UpdateQuestion(string id, Questions question);
         Task<List<Questions>> GetQuestionsByType(string type);
+        Task<Questions> GetQuestionsById(string id);
     }
 }

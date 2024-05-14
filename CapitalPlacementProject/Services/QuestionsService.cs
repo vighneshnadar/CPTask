@@ -26,6 +26,11 @@ namespace CapitalPlacementProject.Services
             var response = await _questionsRepository.GetQuestionsByType(type);
             return response;
         }
-   
+        public async Task<Questions> GetQuestionsById(string id)
+        {
+            var response = await _questionsRepository.GetQuestionsById(id);
+            return response;
+        }
+
     }
 }
