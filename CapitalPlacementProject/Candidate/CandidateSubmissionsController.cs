@@ -18,12 +18,27 @@ namespace CapitalPlacementProject.Candidate
 
         [HttpPost]
         [Route("/SubmitAnswer")]
-        public async Task<IActionResult> SubmitAnswer(CandidateSubmitData answersData)
+        public async Task<IActionResult> SubmitAnswer(List<CandidateSubmitData> answersData)
         {
             await _candidateSubmissionsService.AddSubmittedData(answersData);
             return Ok();
         }
-       
+        [HttpGet("/GetSubmissionById/{id}")]
+        public async Task<IActionResult> GetSubmissionById(string id)
+        {
+            var submission = await _candidateSubmissionsService.GetSubmissionById(id);
+            return Ok(submission);
+        }
+        [HttpDelete("/DeleteSubmission/{id}")]
+        public async Task<IActionResult> DeleteSubmission(string id)
+        {
+            var isDeleted = await _candidateSubmissionsService.DeleteSubmission(id);
+            if (isDeleted)
+            {
+                return Ok();
+            }
+            return BadRequest();
+        }
 
     }
 }

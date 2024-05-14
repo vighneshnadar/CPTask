@@ -12,9 +12,19 @@ namespace CapitalPlacementProject.Services
             _candidateSubmissionRepository = candidateSubmissionRepository;
         }
 
-        public async Task AddSubmittedData(CandidateSubmitData candidateSubmitData)
+        public async Task AddSubmittedData(List<CandidateSubmitData> candidateSubmitData)
         {
             await _candidateSubmissionRepository.AddSubmittedData(candidateSubmitData);
+        }
+        public async Task<List<CandidateSubmitData>> GetSubmissionById(string id)
+        {
+            var response = await _candidateSubmissionRepository.GetSubmissionById(id);
+            return response;
+        }
+        public async Task<bool> DeleteSubmission(string id)
+        {
+            var response = await _candidateSubmissionRepository.DeleteSubmission(id);
+            return response;
         }
     }
 }
